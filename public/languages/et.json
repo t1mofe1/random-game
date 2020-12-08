@@ -1,0 +1,13 @@
+{
+    "doc_title": "RandomNum Mäng",
+    "game_title": "Arva ära number vahemikust <min> kuni <max>!",
+    "btn_text": "Arva Ära",
+    "swal_btn_text": "Proovi Uuesti",
+    "wrong_num": "Kahjuks sa ei arvanud ära õige numbri.",
+    "close_num": "Ai... Sa pakkusid väga lähedale!",
+    "right_num": [
+        "Vau!! Esimese katsega ning kohe pihta..",
+        "Hästi tehtud! Ainult <tries> katset läks sul numbri arvamisele.",
+        "Pole paha.. Arvasid õige numbri <tries> katsega!"
+    ]
+}

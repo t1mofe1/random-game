@@ -1,0 +1,13 @@
+{
+    "doc_title": "RandomNum Game",
+    "game_title": "Guess the number from <min> to <max>!",
+    "btn_text": "Guess",
+    "swal_btn_text": "Try Again",
+    "wrong_num": "Unfortunately, you have not guessed.",
+    "close_num": "Oh, you offered very close!",
+    "right_num": [
+        "Wow!! You guessed the correct number with the first attempt.",
+        "Well done! It took you only <tries> attempts to guess the number!",
+        "Not bad.. You guessed the correct number with <tries> attempts!"
+    ]
+}
