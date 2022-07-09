@@ -1,10 +1,14 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 
-app.use(express.static("public"));
+app.use(
+	require('helmet')({
+		contentSecurityPolicy: false,
+	}),
+);
 
-app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html");
-});
+app.use(express.static('public'));
 
-app.listen(process.env.PORT || 80);
+app.get('*', (_, res) => res.sendFile(__dirname + '/index.html'));
+
+app.listen(process.env.PORT ?? 80, () => console.log(`Server started!`));

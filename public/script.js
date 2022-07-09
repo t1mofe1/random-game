@@ -1,52 +1,57 @@
-const input = document.querySelector('#input');
-const btn = document.querySelector('#btn');
-
 let randomNumber, tries;
 
 function generateRandom() {
-    randomNumber = Math.floor(Math.random() * 10) + 1;
-    console.log("RandomNumber:", randomNumber);
-    tries = 0;
+	randomNumber = Math.floor(Math.random() * 10) + 1;
+	console.log('RandomNumber:', randomNumber);
+	tries = 0;
 }
 
 generateRandom();
 
-input.addEventListener("keyup", function(e) {
-    if (e.keyCode === 13) {
-        e.preventDefault();
-        btn.click();
-    }
+// enter key submit
+input.addEventListener('keyup', e => {
+	if (e.keyCode === 13) {
+		e.preventDefault();
+		btn.click();
+	}
 });
 
-input.addEventListener("change", () => {
-    if(input.value.length <= 0) btn.disabled = true;
-    else btn.disabled = false;
-});
+// if input is empty, make button disabled
+input.addEventListener('change', () => (btn.disabled = input.value.length <= 0));
 
 btn.addEventListener('click', () => {
-    if(input.value.length <= 0) return btn.disabled = true;
-    let userValue = +input.value;
-    input.value = '';
-    console.log("User typed:", userValue);
-    tries++;
-    if (userValue === randomNumber) {
-        Swal.fire({
-            title: window.lang.getRightNumText(tries),
-            icon: 'success',
-            confirmButtonText: window.lang.swal_btn_text
-        });
-        generateRandom();
-    } else if ((userValue + 1 === randomNumber) || (userValue - 1 === randomNumber)) {
-        Swal.fire({
-            title: window.lang.close_num,
-            icon: 'info',
-            confirmButtonText: window.lang.swal_btn_text
-        });
-    } else {
-        Swal.fire({
-            title: window.lang.wrong_num,
-            icon: 'error',
-            confirmButtonText: window.lang.swal_btn_text
-        });
-    }
+	if (input.value.length <= 0) return (btn.disabled = true);
+
+	const userValue = Number(input.value);
+	input.value = '';
+
+	console.log(`User typed: ${userValue}`);
+
+	tries++;
+
+	let modalTitle;
+	let modalIcon;
+
+	if (userValue === randomNumber) {
+		// user guessed the number
+		modalTitle = window.lang.getRightNumText(tries);
+		modalIcon = 'success';
+	} else if ([userValue + 1, userValue - 1].includes(randomNumber)) {
+		// user guessed number next to the random number
+		modalTitle = window.lang.close_num;
+		modalIcon = 'info';
+	} else {
+		// user guessed wrong number
+		modalTitle = window.lang.wrong_num;
+		modalIcon = 'error';
+	}
+
+	Swal.fire({
+		title: modalTitle,
+		icon: modalIcon,
+		confirmButtonText: window.lang.swal_btn_text,
+	});
+
+	// if user guessed right number, restart game
+	userValue === randomNumber && generateRandom();
 });
